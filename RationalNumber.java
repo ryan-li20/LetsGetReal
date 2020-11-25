@@ -1,5 +1,4 @@
-public class RationalNumber extends RealNumber
-{
+public class RationalNumber extends Number{
   private int numerator, denominator;
 
   /**Initialize the RationalNumber with the provided values
@@ -8,17 +7,18 @@ public class RationalNumber extends RealNumber
   *@param deno the denominator
   */
   public RationalNumber(int nume, int deno){
-    super(0.0);//this value is ignored!
     numerator = nume;
     denominator = deno;
     if(deno == 0){
       numerator = 0;
       denominator = 1;
     }
+    negafy();
     reduce();
   }
 
   public double getValue(){
+    negafy();
     return numerator / denominator;
   }
 
@@ -26,12 +26,14 @@ public class RationalNumber extends RealNumber
   *@return the numerator
   */
   public int getNumerator(){
+    negafy();
     return numerator;
   }
   /**
   *@return the denominator
   */
   public int getDenominator(){
+    negafy();
     return denominator;
   }
   /**
@@ -47,6 +49,8 @@ public class RationalNumber extends RealNumber
   *@return true when the RationalNumbers have the same numerators and denominators, false otherwise.
   */
   public boolean equals(RationalNumber other){
+    this.negafy();
+    other.negafy();
     boolean what = this.getNumerator() == other.getNumerator();
     boolean hatw = this.getDenominator() == other.getDenominator();
     return what && hatw;
@@ -57,6 +61,7 @@ public class RationalNumber extends RealNumber
   *@return the value expressed as "3/4" or "8/3"
   */
   public String toString(){
+    negafy();
     return "" + getNumerator() + "/" + getDenominator();
   }
 
@@ -102,6 +107,7 @@ public class RationalNumber extends RealNumber
     int denomss = this.getDenominator() * other.getDenominator();
     RationalNumber thing = new RationalNumber(numss, denomss);
     thing.reduce();
+    negafy();
     return thing;
   }
 
@@ -113,6 +119,7 @@ public class RationalNumber extends RealNumber
     int denoms = this.getDenominator() * other.getNumerator();
     RationalNumber thing = new RationalNumber(numss, denoms);
     thing.reduce();
+    negafy();
     return thing;
   }
 
@@ -135,5 +142,12 @@ public class RationalNumber extends RealNumber
     int denom =  this.getDenominator() * other.getDenominator();
     RationalNumber ret = new RationalNumber(nums-nums2, denom);
     return ret;
+  }
+
+  private void negafy(){
+    if(getDenominator() < 0){
+      numerator = 0-numerator;
+      denominator = 0-denominator;
+    }
   }
 }

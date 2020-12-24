@@ -1,6 +1,16 @@
 public class Tester{
   public static void main(String[] args){
-    System.out.println(gcd(100, 10));
+    RationalNumber a = new RationalNumber(10, 14);
+    System.out.println(a.getDenominator());
+    System.out.println(a.getNumerator());
+    System.out.println(a.getValue());
+    System.out.println(a.reciprocal());
+    System.out.println(a.toString());
+
+    System.out.println(a.multiply(a));
+    System.out.println(a.divide(a));
+    System.out.println(a.subtract(a));
+    System.out.println(a.add(a));
   }
 
   public static int gcd(int x, int y){

@@ -13,6 +13,9 @@ public class RationalNumber extends Number{
       numerator = 0;
       denominator = 1;
     }
+    if(numerator == 0){
+
+    }
     negafy();
     reduce();
   }
@@ -33,7 +36,10 @@ public class RationalNumber extends Number{
   *@return the denominator
   */
   public int getDenominator(){
-    negafy();
+    if(denominator < 0){
+      numerator = 0-numerator;
+      denominator = 0-denominator;
+    }
     return denominator;
   }
   /**
@@ -62,6 +68,12 @@ public class RationalNumber extends Number{
   */
   public String toString(){
     negafy();
+    if(getDenominator() == 0){
+      return "0";
+    }
+    if(getDenominator() == 1){
+      return "" + getNumerator();
+    }
     return "" + getNumerator() + "/" + getDenominator();
   }
 
@@ -95,8 +107,12 @@ public class RationalNumber extends Number{
   *reduced after construction.
   */
   private void reduce(){
-    numerator = numerator / gcd(numerator, denominator);
-    denominator = denominator / gcd(numerator, denominator);
+    if(numerator == 0){
+      return;
+    }
+    int g = gcd(numerator, denominator);
+    numerator = numerator / g;
+    denominator = denominator / g;
   }
   /******************Operations Return a new RationalNumber!!!!****************/
   /**
@@ -140,7 +156,7 @@ public class RationalNumber extends Number{
     int nums = this.getNumerator() * other.getDenominator();
     int nums2 = other.getNumerator() * this.getDenominator();
     int denom =  this.getDenominator() * other.getDenominator();
-    RationalNumber ret = new RationalNumber(nums-nums2, denom);
+    RationalNumber ret = new RationalNumber(nums - nums2, denom);
     return ret;
   }
 
